@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.39941ddc.css",
+    "main.js": "/static/js/main.ad7c8baf.js",
+    "static/js/415.4d6acbeb.chunk.js": "/static/js/415.4d6acbeb.chunk.js",
+    "static/js/787.1ed0c42c.chunk.js": "/static/js/787.1ed0c42c.chunk.js",
+    "static/media/portfolio.PNG": "/static/media/portfolio.631bc8561078c76e1c35.PNG",
+    "static/media/music-hub.png": "/static/media/music-hub.b9102363224337bde14b.png",
+    "static/media/home-main.svg": "/static/media/home-main.541f8179af8209ce03ccf2178fe62dbf.svg",
+    "static/media/about.png": "/static/media/about.aee0f771fbfc1e7b8fa8.png",
+    "static/media/Rajat-Resume.pdf": "/static/media/Rajat-Resume.a9faea55c831ada6d89d.pdf",
+    "static/media/food-web.PNG": "/static/media/food-web.78696e5a008de1c00782.PNG",
+    "static/media/home-bg.jpg": "/static/media/home-bg.dc52d5d40a40b13154b0.jpg",
+    "static/media/todos.PNG": "/static/media/todos.bb7169152c55febcd0e2.PNG",
+    "static/media/auth-app.png": "/static/media/auth-app.8ad4588d9f8debfdd3e6.png",
+    "static/media/logo.png": "/static/media/logo.dacfcf91a90c829a00e2.png",
+    "static/media/avatar.svg": "/static/media/avatar.5852f40fbb38aa284829fa3fb7722225.svg",
+    "static/media/tictactoe.png": "/static/media/tictactoe.6940c7f6c0d5032cd211.png",
+    "static/media/pre.svg": "/static/media/pre.d4812f51c8c80976eaab.svg",
+    "index.html": "/index.html",
+    "main.39941ddc.css.map": "/static/css/main.39941ddc.css.map",
+    "main.ad7c8baf.js.map": "/static/js/main.ad7c8baf.js.map",
+    "415.4d6acbeb.chunk.js.map": "/static/js/415.4d6acbeb.chunk.js.map",
+    "787.1ed0c42c.chunk.js.map": "/static/js/787.1ed0c42c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.39941ddc.css",
+    "static/js/main.ad7c8baf.js"
+  ]
+}
