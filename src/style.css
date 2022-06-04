@@ -149,6 +149,9 @@ button:focus {
   .navbar-nav .nav-item a::after {
     display: none !important;
   }
+  .project_card-link{
+    flex-direction: column;
+  }
 }
 .navbar-brand {
   color: rgb(250, 250, 250) !important;
@@ -563,6 +566,20 @@ button:focus {
   overflow: hidden !important;
   transition: all 0.4s ease 0s !important;
 }
+.social-icons-si {
+  font-size: 4.5em !important;
+  margin: 15px !important;
+  padding: 10px !important;
+  opacity: 0.93 !important;
+  /* border: 1.7px solid rgba(200, 137, 230, 0.637) !important; */
+  vertical-align: middle !important;
+  text-align: center !important;
+  border-radius: 5px !important;
+  display: table !important;
+  /* box-shadow: 4px 5px 4px 3px rgba(89, 4, 168, 0.137) !important; */
+  overflow: hidden !important;
+  transition: all 0.4s ease 0s !important;
+}
 
 @media (max-width: 767px) {
   .tech-icons {
@@ -756,6 +773,7 @@ button:focus {
   margin-top:40px;
   display: flex;
   flex-direction : row;
+  gap : 5px;
   justify-content: space-between;
 
 }

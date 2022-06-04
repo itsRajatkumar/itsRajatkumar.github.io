@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { CgCPlusPlus } from "react-icons/cg";
-import { FaHtml5,FaGithub,FaBootstrap } from "react-icons/fa"
+import { FaHtml5,FaBootstrap,FaAws } from "react-icons/fa"
 import {
   DiJavascript1,
   DiReact,
@@ -11,7 +11,7 @@ import {
   DiGit,
 } from "react-icons/di";
 import {
-  SiFirebase,SiExpress
+  SiFirebase,SiExpress, SiDjango
 } from "react-icons/si";
 import {
   IoLogoCss3,
@@ -42,7 +42,13 @@ function Techstack() {
         <SiFirebase />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
+        <FaAws />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
         <DiPython />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <SiDjango />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
         <FaHtml5 />

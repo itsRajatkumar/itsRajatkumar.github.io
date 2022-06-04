@@ -2,17 +2,16 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
-import auth_app from "../../Assets/Projects/auth-app.png";
-import Portfolio from "../../Assets/Projects/portfolio.PNG";
-import todos from "../../Assets/Projects/todos.PNG";
-import food_web from "../../Assets/Projects/food-web.PNG";
-import web_scrap from "../../Assets/Projects/web_scrap.png";
-import telegram_bot from "../../Assets/Projects/telegram_bot.jpg";
-import MusicHub from "../../Assets/Projects/music-hub.png";
-import tictactoe from "../../Assets/Projects/tictactoe.png";
-
 
 function Projects() {
+  const auth_app = "https://raw.githubusercontent.com/itsRajatkumar/resume/main/Projects/auth-app.png";
+  const Portfolio = "https://raw.githubusercontent.com/itsRajatkumar/resume/main/Projects/portfolio.PNG";
+  const todos = "https://raw.githubusercontent.com/itsRajatkumar/resume/main/Projects/todos.PNG";
+  const food_web = "https://raw.githubusercontent.com/itsRajatkumar/resume/main/Projects/food-web.PNG";
+  const web_scrap = "https://raw.githubusercontent.com/itsRajatkumar/resume/main/Projects/web_scrap.png";
+  const telegram_bot = "https://raw.githubusercontent.com/itsRajatkumar/resume/main/Projects/telegram_bot.jpg";
+  const MusicHub = "https://raw.githubusercontent.com/itsRajatkumar/resume/main/Projects/music-hub.png";
+  const tictactoe = "https://raw.githubusercontent.com/itsRajatkumar/resume/main/Projects/tictactoe.png";
   return (
     <Container fluid className="project-section">
       <Particle />

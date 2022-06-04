@@ -16,18 +16,24 @@ function ProjectCards(props) {
 
         </div>
         <div className="project_card-link">
-        <Button variant="primary" href={props.code_link} target="_blank">
-          <BiLinkExternal /> &nbsp;
-          View Code
-        </Button>
+
         <>
         {
-          props.deployed ? <Button variant="primary" href={props.deploy_link} target="_blank">
+          props.deployed ?<>
+          <Button variant="primary" href={props.code_link} target="_blank">
+            <BiLinkExternal /> &nbsp;
+            View Code
+          </Button>
+           <Button variant="primary" href={props.deploy_link} target="_blank">
           <BiLinkExternal /> &nbsp; View Project
-        </Button> : ''
+        </Button>
+        </> :   <Button variant="primary" href={props.code_link} target="_blank">
+                  <BiLinkExternal /> &nbsp;
+                  View Code
+                </Button>
         }
         </>
-        
+
 
         </div>
       </Card.Body>

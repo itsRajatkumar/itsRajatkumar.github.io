@@ -15,7 +15,7 @@ function Footer() {
     <Container fluid className="footer">
       <Row>
         <Col md="4" className="footer-copywright">
-          <img className="footer_logo" src={logo}/>
+          <img className="footer_logo" src={logo} alt="footer logo"/>
         </Col>
         <Col md="4" className="footer-copywright">
           <h3>Copyright © {year} Rajatkumar.tech</h3>
