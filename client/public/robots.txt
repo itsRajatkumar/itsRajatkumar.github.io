@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://alexjohnson-portfolio.com/sitemap.xml
+
+# Crawl-delay for being respectful
+Crawl-delay: 1
