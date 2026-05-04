@@ -64,3 +64,14 @@ export interface SiteSettings {
   showHomeProjects?: boolean;
   showHomeSkills?: boolean;
 }
+
+export interface BlogPost {
+  title: string;
+  slug: { current: string };
+  excerpt?: string;
+  mainImage?: unknown;
+  publishedAt?: string;
+  categories?: { title: string; slug: { current: string }; color: string }[];
+  author?: { name: string; image?: unknown; slug?: { current: string }; bio?: unknown; social?: unknown[] };
+  body?: unknown;
+}

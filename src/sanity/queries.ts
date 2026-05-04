@@ -104,3 +104,81 @@ export const allSkillsQuery = `*[_type == "skill" && enabled != false] | order(c
   skillName,
   icon
 }`;
+
+// ── Blog ──
+export const allPostsQuery = `*[_type == "post"] | order(publishedAt desc) {
+  title,
+  slug,
+  excerpt,
+  mainImage,
+  publishedAt,
+  categories[]->{ title, slug, color },
+  author->{ name, image, slug }
+}`;
+
+export const featuredPostsQuery = `*[_type == "post" && featured == true] | order(publishedAt desc)[0...3] {
+  title,
+  slug,
+  excerpt,
+  mainImage,
+  publishedAt,
+  categories[]->{ title, slug, color },
+  author->{ name, image, slug }
+}`;
+
+export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0] {
+  title,
+  slug,
+  mainImage,
+  publishedAt,
+  body,
+  categories[]->{ title, slug, color },
+  author->{ name, image, slug, bio, social }
+}`;
+
+export const allCategoriesQuery = `*[_type == "category"] | order(title asc) {
+  title,
+  slug,
+  color,
+  description
+}`;
+
+export const postsByCategoryQuery = `*[_type == "post" && $categorySlug in categories[]->slug.current] | order(publishedAt desc) {
+  title,
+  slug,
+  excerpt,
+  mainImage,
+  publishedAt,
+  categories[]->{ title, slug, color },
+  author->{ name, image, slug }
+}`;
+
+export const categoryBySlugQuery = `*[_type == "category" && slug.current == $slug][0] {
+  title,
+  slug,
+  color,
+  description
+}`;
+
+export const postsByAuthorQuery = `*[_type == "post" && author->slug.current == $authorSlug] | order(publishedAt desc) {
+  title,
+  slug,
+  excerpt,
+  mainImage,
+  publishedAt,
+  categories[]->{ title, slug, color },
+  author->{ name, image, slug }
+}`;
+
+export const authorBySlugQuery = `*[_type == "author" && slug.current == $slug][0] {
+  name,
+  slug,
+  image,
+  bio,
+  social
+}`;
+
+// Sitemap Slugs
+export const postSlugsQuery = `*[_type == "post" && defined(slug.current)]{ "slug": slug.current, "_updatedAt": _updatedAt }`;
+export const categorySlugsQuery = `*[_type == "category" && defined(slug.current)]{ "slug": slug.current, "_updatedAt": _updatedAt }`;
+export const authorSlugsQuery = `*[_type == "author" && defined(slug.current)]{ "slug": slug.current, "_updatedAt": _updatedAt }`;

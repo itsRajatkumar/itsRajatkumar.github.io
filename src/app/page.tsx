@@ -6,9 +6,10 @@ import SectionHeading from '@/components/SectionHeading';
 import ProjectCard from '@/components/ProjectCard';
 import SkillBadge from '@/components/SkillBadge';
 import Hero from '@/components/Hero';
+import PostList from '@/components/blog/PostList';
 import { sanityClient } from '@/sanity/client';
-import { allProjectsQuery, allSkillsQuery, siteSettingsQuery } from '@/sanity/queries';
-import { SiteSettings, Stat } from '@/lib/types';
+import { allProjectsQuery, allSkillsQuery, siteSettingsQuery, featuredPostsQuery } from '@/sanity/queries';
+import { SiteSettings, Stat, BlogPost } from '@/lib/types';
 
 export const revalidate = 3600;
 
@@ -47,13 +48,16 @@ export default async function Home() {
   let projects: Project[] = [];
   let skills: Skill[] = [];
   let settings: SiteSettings = {};
+  let featuredPosts: BlogPost[] = [];
 
   try {
-    const [projectData, skillData, settingsData] = await Promise.all([
+    const [projectData, skillData, settingsData, featuredPostsData] = await Promise.all([
       sanityClient.fetch(allProjectsQuery),
       sanityClient.fetch(allSkillsQuery),
       sanityClient.fetch(siteSettingsQuery),
+      sanityClient.fetch(featuredPostsQuery),
     ]);
+    if (featuredPostsData) featuredPosts = featuredPostsData;
     if (projectData) projects = projectData;
     if (skillData) skills = skillData;
     if (settingsData) settings = settingsData;
@@ -125,6 +129,38 @@ export default async function Home() {
                   </div>
                 </AnimatedSection>
               ))}
+            </div>
+          </div>
+          <div className="section-container">
+            <div className="w-full h-[1px] bg-[var(--border-color)] mt-24" />
+          </div>
+        </section>
+      )}
+
+      {/* ═══ Featured Blogs Section ═══ */}
+      {featuredPosts && featuredPosts.length > 0 && (
+        <section className="section-padding">
+          <div className="section-container relative z-10">
+            <SectionHeading
+              subtitle="LATEST WRITING"
+              title="Featured Blogs"
+            />
+            
+            <div className="grid gap-10 lg:gap-10 md:grid-cols-2 xl:grid-cols-3 mt-12">
+              {featuredPosts.map((post, index) => (
+                <AnimatedSection key={post.slug.current} delay={0.1 * (index + 1)}>
+                  <PostList post={post} aspect="square" />
+                </AnimatedSection>
+              ))}
+            </div>
+
+            <div className="text-center mt-16">
+              <Link
+                href="/blog"
+                className="inbio-button !px-10 !py-4"
+              >
+                VIEW ALL POSTS <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
             </div>
           </div>
           <div className="section-container">

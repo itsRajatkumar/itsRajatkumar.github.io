@@ -27,6 +27,19 @@ export const siteSettings = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'logoalt',
+      title: 'Alternate logo (optional)',
+      description: 'Upload alternate logo here. it can be light / dark variation ',
+      type: 'image',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'w3ckey',
+      type: 'string',
+      title: 'Web3Forms Access Key',
+      description: 'Enter Access key obtained from web3forms.com. It is required to make the form work.',
+    }),
+    defineField({
       name: 'name',
       title: 'Full Name',
       type: 'string',
@@ -63,7 +76,6 @@ export const siteSettings = defineType({
       title: 'SEO Description',
       type: 'text',
       fieldset: 'seo',
-      rows: 3,
       description: 'Default meta description for search engines (max ~160 chars)',
       initialValue: 'Full-Stack Developer specializing in MERN stack, ONDC ecosystem, and C++. Building scalable web applications and digital commerce solutions.',
     }),
@@ -114,7 +126,6 @@ export const siteSettings = defineType({
       title: 'Hero Description',
       type: 'text',
       fieldset: 'hero',
-      rows: 3,
       description: 'The paragraph below your name on the homepage',
       initialValue: 'Crafting scalable web applications and digital commerce solutions. Passionate about clean code and exceptional user experiences.',
     }),
@@ -157,7 +168,6 @@ export const siteSettings = defineType({
       title: 'Bio Paragraphs',
       type: 'text',
       fieldset: 'about',
-      rows: 8,
       description: 'Use double line breaks (Enter twice) to separate paragraphs',
     }),
     defineField({
@@ -210,7 +220,6 @@ export const siteSettings = defineType({
       title: 'Philosophy Quote',
       type: 'text',
       fieldset: 'about',
-      rows: 3,
       initialValue: 'The best code is no code at all. Every new line of code you willingly bring into the world is code that has to be debugged, maintained, and supported.',
     }),
     defineField({

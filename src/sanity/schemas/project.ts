@@ -28,7 +28,6 @@ export const project = defineType({
       name: 'excerpt',
       title: 'Short Description',
       type: 'text',
-      rows: 3,
     }),
     defineField({
       name: 'tags',
