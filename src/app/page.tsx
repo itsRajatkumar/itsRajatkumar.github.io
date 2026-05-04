@@ -159,7 +159,7 @@ export default async function Home() {
               Let&apos;s Build Something <span className="text-[var(--accent)]">Extraordinary</span>
             </h2>
             <p className="text-lg text-[var(--text-secondary)] mb-10 max-w-2xl mx-auto leading-relaxed">
-              I am available for freelance work. Connect with me via phone: {settings.phone || '+91 XXXXX XXXXX'} or email: {settings.contactEmail || 'rajat@example.com'}
+              I am available for freelance work. Connect with me via {settings.showPhone !== false ? `phone: ${settings.phone || '+91 XXXXX XXXXX'} or ` : ''}email: {settings.contactEmail || 'rajat@example.com'}
             </p>
             <Link
               href="/contact"

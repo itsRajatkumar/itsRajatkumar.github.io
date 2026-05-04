@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Code2 } from 'lucide-react';
 import { SiteSettings } from '@/lib/types';
+import { urlFor } from '@/sanity/image';
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
@@ -56,9 +58,20 @@ export default function Navbar({ siteSettings }: { siteSettings: SiteSettings })
           <div className="flex items-center justify-between h-full">
             {/* Logo Section */}
             <Link href="/" className="flex items-center gap-4 group">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[var(--bg-card)] shadow-[var(--shadow-button)] border-2 border-[var(--border-color)] group-hover:shadow-[var(--shadow-button-hover)] transition-all">
-                <Code2 className="text-[var(--accent)] w-6 h-6" />
-              </div>
+              {siteSettings?.logo ? (
+                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--border-color)] group-hover:shadow-[var(--shadow-button-hover)] transition-all">
+                  <Image 
+                    src={urlFor(siteSettings.logo).url()} 
+                    alt="Logo" 
+                    fill 
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[var(--bg-card)] shadow-[var(--shadow-button)] border-2 border-[var(--border-color)] group-hover:shadow-[var(--shadow-button-hover)] transition-all">
+                  <Code2 className="text-[var(--accent)] w-6 h-6" />
+                </div>
+              )}
               <span className="text-xl font-extrabold tracking-widest text-[var(--text-primary)]">
                 {initials}
               </span>
@@ -132,9 +145,20 @@ export default function Navbar({ siteSettings }: { siteSettings: SiteSettings })
             >
               <div className="flex flex-col h-full">
                 <div className="flex items-center justify-between mb-12">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[var(--bg-card)] shadow-[var(--shadow-button)] border-2 border-[var(--border-color)]">
-                    <Code2 className="text-[var(--accent)] w-6 h-6" />
-                  </div>
+                  {siteSettings?.logo ? (
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--border-color)]">
+                      <Image 
+                        src={urlFor(siteSettings.logo).url()} 
+                        alt="Logo" 
+                        fill 
+                        className="object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[var(--bg-card)] shadow-[var(--shadow-button)] border-2 border-[var(--border-color)]">
+                      <Code2 className="text-[var(--accent)] w-6 h-6" />
+                    </div>
+                  )}
                   <button
                     onClick={() => setIsOpen(false)}
                     className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-card)] shadow-[var(--shadow-button)] text-[var(--accent)]"

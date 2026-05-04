@@ -54,7 +54,7 @@ export default async function AboutPage() {
                     src={urlFor(settings.heroImage).url()}
                     alt={settings.name || "Profile"}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-[var(--text-muted)] italic">

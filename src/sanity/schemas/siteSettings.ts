@@ -20,6 +20,13 @@ export const siteSettings = defineType({
     // GENERAL INFO
     // ═══════════════════════════════════════
     defineField({
+      name: 'logo',
+      title: 'Site Logo',
+      type: 'image',
+      description: 'Optional. If not provided, site will use initials (e.g. RK).',
+      options: { hotspot: true },
+    }),
+    defineField({
       name: 'name',
       title: 'Full Name',
       type: 'string',

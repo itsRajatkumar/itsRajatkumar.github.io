@@ -3,6 +3,7 @@
 // ── Site Settings (full) ──
 export const siteSettingsQuery = `*[_type == "siteSettings"][0] {
   name,
+  logo,
   phone,
   showPhone,
   // SEO

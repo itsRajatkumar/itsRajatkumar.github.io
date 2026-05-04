@@ -13,6 +13,7 @@ export interface Stat {
 
 export interface SiteSettings {
   name?: string;
+  logo?: unknown;
   phone?: string;
   showPhone?: boolean;
   // SEO

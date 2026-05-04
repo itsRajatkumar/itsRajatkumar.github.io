@@ -51,8 +51,8 @@ export default async function ContactPage() {
   const subheading = settings?.contactSubheading || 'Get In Touch';
 
   return (
-    <div className="py-16 md:py-24">
-      <div className="section-container">
+    <div className="section-padding bg-[var(--bg-primary)] min-h-screen">
+      <div className="section-container pt-32 lg:pt-40">
         <SectionHeading title={subheading} subtitle={heading} />
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-12">
@@ -60,13 +60,13 @@ export default async function ContactPage() {
           <div className="lg:col-span-5">
             <AnimatedSection delay={0.1}>
               <div className="inbio-card h-full">
-                <div className="rounded-xl overflow-hidden mb-8 relative h-[250px] bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-primary)]">
+                <div className="rounded-xl overflow-hidden mb-8 relative h-[350px] md:h-[400px] bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-primary)]">
                   {settings?.heroImage ? (
                     <Image
                       src={urlFor(settings.heroImage).url()}
                       alt={name}
                       fill
-                      className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                      className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-500"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-[var(--text-muted)] opacity-50">
