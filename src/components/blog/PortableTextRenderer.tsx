@@ -53,7 +53,8 @@ const components: PortableTextComponents = {
   },
 };
 
-export default function PortableTextRenderer({ value }: { value: unknown }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function PortableTextRenderer({ value }: { value: any }) {
   return (
     <div className="prose prose-lg mx-auto prose-invert prose-a:text-[var(--accent)] prose-img:rounded-xl">
       <PortableText value={value} components={components} />
