@@ -69,9 +69,9 @@ export interface BlogPost {
   title: string;
   slug: { current: string };
   excerpt?: string;
-  mainImage?: unknown;
+  mainImage?: { alt?: string; [key: string]: any };
   publishedAt?: string;
   categories?: { title: string; slug: { current: string }; color: string }[];
-  author?: { name: string; image?: unknown; slug?: { current: string }; bio?: unknown; social?: unknown[] };
+  author?: { name: string; image?: any; slug?: { current: string }; bio?: unknown; social?: unknown[] };
   body?: unknown;
 }
