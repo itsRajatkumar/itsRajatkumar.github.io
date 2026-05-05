@@ -29,6 +29,7 @@ export default function PostList({ post, aspect = 'landscape', preloadImage = fa
               src={imageUrl}
               alt={post.mainImage?.alt || post.title || 'Thumbnail'}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority={preloadImage}
               className="object-cover transition-all"
             />
@@ -71,7 +72,7 @@ export default function PostList({ post, aspect = 'landscape', preloadImage = fa
               {authorImageUrl ? (
                 <Image
                   src={authorImageUrl}
-                  alt={post.author?.name || 'Author'}
+                  alt=""
                   fill
                   sizes="30px"
                   className="object-cover"
@@ -88,7 +89,7 @@ export default function PostList({ post, aspect = 'landscape', preloadImage = fa
               {authorImageUrl ? (
                 <Image
                   src={authorImageUrl}
-                  alt={post.author?.name || 'Author'}
+                  alt=""
                   fill
                   sizes="30px"
                   className="object-cover"

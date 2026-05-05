@@ -113,9 +113,9 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
 
           {/* Right Content - Profile Image */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0.5, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
             className="flex-1 order-1 lg:order-2 flex justify-center"
           >
             <div className="relative w-[300px] h-[350px] sm:w-[400px] sm:h-[450px] lg:w-[450px] lg:h-[550px] inbio-card !p-4">
@@ -125,6 +125,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
                     src={urlFor(settings.heroImage).url()}
                     alt={settings.name || "Profile"}
                     fill
+                    sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 450px"
                     className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
                     priority
                   />
