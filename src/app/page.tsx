@@ -75,8 +75,34 @@ export default async function Home() {
     return acc;
   }, {} as Record<string, Skill[]>);
 
+  // JSON-LD Schema
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": settings.name || "Rajat Kumar Prajapati",
+    "url": settings.siteUrl || "https://rajatkumar.tech",
+    "jobTitle": settings.heroSubtitle || "MERN Stack Expert",
+    "worksFor": experiences[0] ? {
+      "@type": "Organization",
+      "name": experiences[0].company
+    } : undefined,
+    "alumniOf": settings.college ? {
+      "@type": "CollegeOrUniversity",
+      "name": settings.college
+    } : undefined,
+    "sameAs": [
+      ...(settings.socialLinks?.filter(l => l.enabled !== false).map(l => l.url) || []),
+      `mailto:${settings.contactEmail || 'contact@rajatkumar.tech'}`
+    ],
+    "knowsAbout": skills.map(s => s.skillName).slice(0, 10)
+  };
+
   return (
     <div className="bg-[var(--bg-primary)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
       {/* ═══ Hero Section ═══ */}
       <Hero settings={settings} />
 
@@ -139,6 +165,8 @@ export default async function Home() {
             <div className="w-full h-[1px] bg-[var(--border-color)] mt-24" />
           </div>
         </section>
+      )}
+
       {/* ═══ Experience Section ═══ */}
       {settings.showHomeExperience !== false && experiences.length > 0 && (
         <section id="resume" className="section-padding">

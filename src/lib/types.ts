@@ -79,9 +79,19 @@ export interface BlogPost {
   title: string;
   slug: { current: string };
   excerpt?: string;
-  mainImage?: { alt?: string; [key: string]: any };
+  mainImage?: { 
+    asset?: { _ref: string };
+    alt?: string; 
+    [key: string]: unknown 
+  };
   publishedAt?: string;
   categories?: { title: string; slug: { current: string }; color: string }[];
-  author?: { name: string; image?: any; slug?: { current: string }; bio?: unknown; social?: unknown[] };
+  author?: { 
+    name: string; 
+    image?: { asset?: { _ref: string } }; 
+    slug?: { current: string }; 
+    bio?: unknown; 
+    social?: unknown[] 
+  };
   body?: unknown;
 }
