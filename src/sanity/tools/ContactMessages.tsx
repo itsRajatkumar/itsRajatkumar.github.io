@@ -98,13 +98,13 @@ export default function ContactMessages() {
       <Container width={1} padding={5}>
         <Card padding={4} tone="critical">
           <Text>{error}</Text>
-          <Button
-            marginTop={4}
-            fontSize={1}
-            padding={3}
-            text="Retry"
-            onClick={fetchMessages}
-          />
+          <Box marginTop={4}>
+            <Button
+              padding={3}
+              text="Retry"
+              onClick={fetchMessages}
+            />
+          </Box>
         </Card>
       </Container>
     );
@@ -118,7 +118,6 @@ export default function ContactMessages() {
             <Heading as="h1">Contact Messages</Heading>
             <Flex gap={2}>
               <Button
-                fontSize={1}
                 padding={2}
                 mode="ghost"
                 text="Refresh"
@@ -157,7 +156,6 @@ export default function ContactMessages() {
                           {format(new Date(msg.created_at), 'PPPp')}
                         </Text>
                         <Button
-                          fontSize={1}
                           padding={2}
                           tone="critical"
                           mode="ghost"

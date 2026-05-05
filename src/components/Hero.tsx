@@ -31,6 +31,12 @@ const iconMap: Record<string, LucideIcon> = {
   box: Box,
   layers: Layers,
   workflow: Workflow,
+  react: Code,
+  nextjs: GlobeIcon,
+  nodejs: Server,
+  typescript: Terminal,
+  javascript: Code,
+  python: Terminal,
 };
 
 export default function Hero({ settings }: { settings: SiteSettings }) {
@@ -38,7 +44,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(50);
+  const [typingSpeed, setTypingSpeed] = useState(30);
 
   useEffect(() => {
     if (!taglines.length) return;
@@ -155,7 +161,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
                     return (
                       <div key={i} className="inbio-button !w-12 !h-12 !p-0 !rounded-lg" title={skill.skillName}>
                         {skill.svgIcon ? (
-                          <div 
+                          <div
                             className="w-[18px] h-[18px] flex items-center justify-center"
                             dangerouslySetInnerHTML={{ __html: skill.svgIcon }}
                           />
@@ -167,9 +173,9 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
                   })}
                   {!settings.heroSkills?.length && (
                     <>
-                      <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"><GithubIcon size={18} /></div>
-                      <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"><GithubIcon size={18} /></div>
-                      <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"><GithubIcon size={18} /></div>
+                      <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg" title="React"><Code size={18} /></div>
+                      <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg" title="Next.js"><GlobeIcon size={18} /></div>
+                      <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg" title="Node.js"><Server size={18} /></div>
                     </>
                   )}
                 </div>
