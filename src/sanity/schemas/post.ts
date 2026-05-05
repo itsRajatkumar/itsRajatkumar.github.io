@@ -45,9 +45,6 @@ export const post = defineType({
           type: 'string',
           title: 'Alternative text',
           description: 'Important for SEO and accessiblity.',
-          options: {
-            isHighlighted: true,
-          },
         }),
       ],
       options: {

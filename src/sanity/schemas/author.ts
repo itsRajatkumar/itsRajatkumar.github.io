@@ -76,7 +76,7 @@ export const author = defineType({
           type: 'block',
           styles: [{ title: 'Normal', value: 'normal' }],
           lists: [],
-        },
+        } as any,
       ],
     }),
   ],

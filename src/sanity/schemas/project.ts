@@ -62,6 +62,8 @@ export const project = defineType({
             { title: 'H4', value: 'h4' },
             { title: 'Quote', value: 'blockquote' },
           ],
+        } as any,
+        {
           marks: {
             decorators: [
               { title: 'Bold', value: 'strong' },

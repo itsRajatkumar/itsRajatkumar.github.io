@@ -6,7 +6,7 @@ interface Category {
   color: string;
 }
 
-export default function CategoryLabel({ categories, center = false }: { categories: Category[]; center?: boolean }) {
+export default function CategoryLabel({ categories, center = false }: { categories?: Category[]; center?: boolean }) {
   const colorMap: Record<string, string> = {
     green: 'text-emerald-500',
     blue: 'text-blue-500',
@@ -17,7 +17,7 @@ export default function CategoryLabel({ categories, center = false }: { categori
 
   return (
     <div className={`${center ? '' : 'flex'} gap-3 mt-5`}>
-      {categories?.length > 0 &&
+      {categories && categories.length > 0 &&
         categories.map((category, index) => (
           <Link href={`/blog/category/${category.slug.current}`} key={index}>
             <span
