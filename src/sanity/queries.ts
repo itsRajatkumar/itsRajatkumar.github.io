@@ -59,7 +59,8 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0] {
   theme,
   githubUsername,
   showHomeProjects,
-  showHomeSkills
+  showHomeSkills,
+  showHomeExperience
 }`;
 
 // ── Projects ──

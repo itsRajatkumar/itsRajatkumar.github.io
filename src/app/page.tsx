@@ -7,9 +7,10 @@ import ProjectCard from '@/components/ProjectCard';
 import SkillBadge from '@/components/SkillBadge';
 import Hero from '@/components/Hero';
 import PostList from '@/components/blog/PostList';
+import ExperienceCard from '@/components/ExperienceCard';
 import { sanityClient } from '@/sanity/client';
-import { allProjectsQuery, allSkillsQuery, siteSettingsQuery, featuredPostsQuery } from '@/sanity/queries';
-import { SiteSettings, Stat, BlogPost } from '@/lib/types';
+import { allProjectsQuery, allSkillsQuery, siteSettingsQuery, featuredPostsQuery, allExperiencesQuery } from '@/sanity/queries';
+import { SiteSettings, Stat, BlogPost, Experience } from '@/lib/types';
 
 export const revalidate = 3600;
 
@@ -49,18 +50,21 @@ export default async function Home() {
   let skills: Skill[] = [];
   let settings: SiteSettings = {};
   let featuredPosts: BlogPost[] = [];
+  let experiences: Experience[] = [];
 
   try {
-    const [projectData, skillData, settingsData, featuredPostsData] = await Promise.all([
+    const [projectData, skillData, settingsData, featuredPostsData, experienceData] = await Promise.all([
       sanityClient.fetch(allProjectsQuery),
       sanityClient.fetch(allSkillsQuery),
       sanityClient.fetch(siteSettingsQuery),
       sanityClient.fetch(featuredPostsQuery),
+      sanityClient.fetch(allExperiencesQuery),
     ]);
     if (featuredPostsData) featuredPosts = featuredPostsData;
     if (projectData) projects = projectData;
     if (skillData) skills = skillData;
     if (settingsData) settings = settingsData;
+    if (experienceData) experiences = experienceData;
   } catch (error) {
     console.error('Error fetching home page data:', error);
   }
@@ -129,6 +133,36 @@ export default async function Home() {
                   </div>
                 </AnimatedSection>
               ))}
+            </div>
+          </div>
+          <div className="section-container">
+            <div className="w-full h-[1px] bg-[var(--border-color)] mt-24" />
+          </div>
+        </section>
+      {/* ═══ Experience Section ═══ */}
+      {settings.showHomeExperience !== false && experiences.length > 0 && (
+        <section id="resume" className="section-padding">
+          <div className="section-container">
+            <SectionHeading
+              subtitle={settings.experienceSubheading || "2022 - PRESENT"}
+              title={settings.experienceHeading || "My Resume"}
+            />
+            
+            <div className="max-w-5xl mx-auto">
+              <div className="relative pl-8 border-l-4 border-[var(--bg-secondary)] border-opacity-50 flex flex-col gap-12">
+                {experiences.slice(0, 3).map((exp, i) => (
+                  <ExperienceCard key={`${exp.company}-${i}`} {...exp} index={i} />
+                ))}
+              </div>
+              
+              <div className="text-center mt-16">
+                <Link
+                  href="/experience"
+                  className="inbio-button !px-10 !py-4"
+                >
+                  VIEW FULL RESUME <ArrowRight className="ml-2 w-4 h-4" />
+                </Link>
+              </div>
             </div>
           </div>
           <div className="section-container">

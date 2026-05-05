@@ -3,7 +3,7 @@ import SectionHeading from '@/components/SectionHeading';
 import ExperienceCard from '@/components/ExperienceCard';
 import { sanityClient } from '@/sanity/client';
 import { allExperiencesQuery, siteSettingsQuery } from '@/sanity/queries';
-import { SiteSettings } from '@/lib/types';
+import { SiteSettings, Experience } from '@/lib/types';
 
 export const revalidate = 3600;
 
@@ -21,15 +21,6 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Resume',
     description: `Professional career timeline and experience of ${name}.`,
   };
-}
-
-interface Experience {
-  company: string;
-  role: string;
-  companyUrl?: string;
-  startDate: string;
-  endDate?: string;
-  description?: string[];
 }
 
 export default async function ExperiencePage() {

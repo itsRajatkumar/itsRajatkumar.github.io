@@ -445,6 +445,13 @@ export const siteSettings = defineType({
       initialValue: true,
     }),
     defineField({
+      name: 'showHomeExperience',
+      title: 'Show Experience on Home Page',
+      type: 'boolean',
+      fieldset: 'main',
+      initialValue: true,
+    }),
+    defineField({
       name: 'theme',
       title: 'Color Theme',
       type: 'string',

@@ -63,6 +63,16 @@ export interface SiteSettings {
   githubUsername?: string;
   showHomeProjects?: boolean;
   showHomeSkills?: boolean;
+  showHomeExperience?: boolean;
+}
+
+export interface Experience {
+  company: string;
+  role: string;
+  companyUrl?: string;
+  startDate: string;
+  endDate?: string;
+  description?: string[];
 }
 
 export interface BlogPost {
