@@ -17,6 +17,11 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0] {
   heroSubtitle,
   heroDescription,
   heroTaglines,
+  "heroSkills": heroSkills[]->{
+    skillName,
+    icon,
+    svgIcon
+  },
   heroImage,
   resumeUrl,
   availableForWork,

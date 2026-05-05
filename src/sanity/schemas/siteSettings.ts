@@ -139,6 +139,14 @@ export const siteSettings = defineType({
       initialValue: ['MERN Stack Developer', 'ONDC Ecosystem Specialist', 'C++ Enthusiast'],
     }),
     defineField({
+      name: 'heroSkills',
+      title: 'Best Skills (Hero Section)',
+      type: 'array',
+      fieldset: 'hero',
+      of: [{ type: 'reference', to: [{ type: 'skill' }] }],
+      description: 'Select the top skills to show in the hero section (e.g. React, Node, etc.)',
+    }),
+    defineField({
       name: 'resumeUrl',
       title: 'Resume Download URL',
       type: 'url',

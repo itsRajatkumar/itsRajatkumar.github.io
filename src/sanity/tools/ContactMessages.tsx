@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { 
-  Card, 
-  Flex, 
-  Text, 
-  Heading, 
-  Stack, 
-  Box, 
-  Badge, 
-  Container, 
+import {
+  Card,
+  Flex,
+  Text,
+  Heading,
+  Stack,
+  Box,
+  Badge,
+  Container,
   Spinner,
   Button
 } from '@sanity/ui';
@@ -44,7 +44,7 @@ export default function ContactMessages() {
         throw error;
       }
       setMessages(data || []);
-      
+
       // Debug log to check if environment variables are present
       if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
         console.warn('Supabase environment variables are missing in Sanity Studio context.');
@@ -66,7 +66,7 @@ export default function ContactMessages() {
         .eq('id', id);
 
       if (error) throw error;
-      
+
       // Refresh list
       setMessages(messages.filter(m => m.id !== id));
     } catch (err) {
@@ -82,10 +82,12 @@ export default function ContactMessages() {
     return (
       <Container width={1} padding={5}>
         <Flex align="center" justify="center" style={{ height: '50vh' }}>
-          <Stack space={3} align="center">
+          <Flex direction="column" align="center">
             <Spinner />
-            <Text>Loading messages from Supabase...</Text>
-          </Stack>
+            <Box marginTop={4}>
+              <Text>Loading messages from Supabase...</Text>
+            </Box>
+          </Flex>
         </Flex>
       </Container>
     );
@@ -96,12 +98,12 @@ export default function ContactMessages() {
       <Container width={1} padding={5}>
         <Card padding={4} tone="critical">
           <Text>{error}</Text>
-          <Button 
-            marginTop={4} 
-            fontSize={1} 
-            padding={3} 
-            text="Retry" 
-            onClick={fetchMessages} 
+          <Button
+            marginTop={4}
+            fontSize={1}
+            padding={3}
+            text="Retry"
+            onClick={fetchMessages}
           />
         </Card>
       </Container>
@@ -115,12 +117,12 @@ export default function ContactMessages() {
           <Flex justify="space-between" align="center">
             <Heading as="h1">Contact Messages</Heading>
             <Flex gap={2}>
-              <Button 
-                fontSize={1} 
-                padding={2} 
-                mode="ghost" 
-                text="Refresh" 
-                onClick={fetchMessages} 
+              <Button
+                fontSize={1}
+                padding={2}
+                mode="ghost"
+                text="Refresh"
+                onClick={fetchMessages}
               />
               <Badge tone="primary">{messages.length} Total</Badge>
             </Flex>
@@ -134,9 +136,9 @@ export default function ContactMessages() {
                   If you have data in Supabase but it's not appearing here, please ensure:
                 </Text>
                 <Box padding={3}>
-                  <Text size={1}>• The table name is exactly <code>contacts</code>.</Text>
-                  <Text size={1}>• Row Level Security (RLS) on Supabase allows <code>SELECT</code> (and <code>DELETE</code>) for the <code>anon</code> role.</Text>
-                  <Text size={1}>• Environment variables are correctly set in <code>.env.local</code>.</Text>
+                  <Text size={1} style={{ paddingBottom: "8px" }}>• The table name is exactly <code>contacts</code>.</Text>
+                  <Text size={1} style={{ paddingBottom: "8px" }}>• Row Level Security (RLS) on Supabase allows <code>SELECT</code> (and <code>DELETE</code>) for the <code>anon</code> role.</Text>
+                  <Text size={1} style={{ paddingBottom: "8px" }}>• Environment variables are correctly set in <code>.env.local</code>.</Text>
                 </Box>
               </Stack>
             </Card>
@@ -154,17 +156,17 @@ export default function ContactMessages() {
                         <Text size={1} muted>
                           {format(new Date(msg.created_at), 'PPPp')}
                         </Text>
-                        <Button 
-                          fontSize={1} 
-                          padding={2} 
-                          tone="critical" 
-                          mode="ghost" 
-                          text="Delete" 
-                          onClick={() => deleteMessage(msg.id)} 
+                        <Button
+                          fontSize={1}
+                          padding={2}
+                          tone="critical"
+                          mode="ghost"
+                          text="Delete"
+                          onClick={() => deleteMessage(msg.id)}
                         />
                       </Flex>
                     </Flex>
-                    
+
                     {msg.subject && (
                       <Box padding={2} style={{ background: 'rgba(0,0,0,0.05)', borderRadius: '4px' }}>
                         <Text size={1} weight="semibold">Subject: {msg.subject}</Text>

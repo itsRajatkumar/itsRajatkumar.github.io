@@ -11,6 +11,12 @@ export interface Stat {
   label: string;
 }
 
+export interface HeroSkill {
+  skillName: string;
+  icon?: string;
+  svgIcon?: string;
+}
+
 export interface SiteSettings {
   name?: string;
   logo?: unknown;
@@ -27,6 +33,7 @@ export interface SiteSettings {
   heroSubtitle?: string;
   heroDescription?: string;
   heroTaglines?: string[];
+  heroSkills?: HeroSkill[];
   heroImage?: unknown;
   resumeUrl?: string;
   availableForWork?: boolean;

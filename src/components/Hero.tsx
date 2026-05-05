@@ -16,7 +16,22 @@ import { urlFor } from '@/sanity/image';
 
 import LiveStatus from './LiveStatus';
 import { useState, useEffect } from 'react';
-import { Globe, Mail } from 'lucide-react';
+import { Globe as GlobeIcon, Mail, Code, Database, Server, Cloud, Terminal, GitBranch, Layout, Cpu, Box, Layers, Workflow, type LucideIcon } from 'lucide-react';
+
+const iconMap: Record<string, LucideIcon> = {
+  code: Code,
+  database: Database,
+  server: Server,
+  cloud: Cloud,
+  terminal: Terminal,
+  'git-branch': GitBranch,
+  globe: GlobeIcon,
+  layout: Layout,
+  cpu: Cpu,
+  box: Box,
+  layers: Layers,
+  workflow: Workflow,
+};
 
 export default function Hero({ settings }: { settings: SiteSettings }) {
   const taglines = settings.heroTaglines || ['Full Stack Developer', 'MERN Stack Expert', 'UI/UX Designer'];
@@ -111,7 +126,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
               <div className="flex flex-col items-center lg:items-start gap-5">
                 <span className="text-xs font-semibold tracking-widest text-[var(--text-muted)] uppercase">FIND ME IN</span>
                 <div className="flex gap-4">
-                  {settings.socialLinks?.filter(l => l.enabled !== false).slice(0, 3).map((link, i) => (
+                  {settings.socialLinks?.filter(l => l.enabled !== false).slice(0, 4).map((link, i) => (
                     <a
                       key={i}
                       href={link.url}
@@ -126,8 +141,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
                       {link.platform === 'instagram' && <InstagramIcon size={18} />}
                       {link.platform === 'youtube' && <YoutubeIcon size={18} />}
                       {link.platform === 'email' && <Mail size={18} />}
-                      {link.platform === 'website' && <Globe size={18} />}
-
+                      {link.platform === 'website' && <GlobeIcon size={18} />}
                     </a>
                   ))}
                 </div>
@@ -136,10 +150,28 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
               <div className="flex flex-col items-center lg:items-start gap-5">
                 <span className="text-xs font-semibold tracking-widest text-[var(--text-muted)] uppercase">BEST SKILL ON</span>
                 <div className="flex gap-4">
-                  <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"><GithubIcon size={18} /></div>
-                  <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"><GithubIcon size={18} /></div>
-                  <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"><GithubIcon size={18} /></div>
-
+                  {settings.heroSkills?.map((skill, i) => {
+                    const IconComponent = skill.icon && iconMap[skill.icon] ? iconMap[skill.icon] : Code;
+                    return (
+                      <div key={i} className="inbio-button !w-12 !h-12 !p-0 !rounded-lg" title={skill.skillName}>
+                        {skill.svgIcon ? (
+                          <div 
+                            className="w-[18px] h-[18px] flex items-center justify-center"
+                            dangerouslySetInnerHTML={{ __html: skill.svgIcon }}
+                          />
+                        ) : (
+                          <IconComponent size={18} />
+                        )}
+                      </div>
+                    );
+                  })}
+                  {!settings.heroSkills?.length && (
+                    <>
+                      <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"><GithubIcon size={18} /></div>
+                      <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"><GithubIcon size={18} /></div>
+                      <div className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"><GithubIcon size={18} /></div>
+                    </>
+                  )}
                 </div>
               </div>
             </motion.div>
