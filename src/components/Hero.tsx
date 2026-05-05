@@ -1,11 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { 
-  GithubIcon, 
-  LinkedinIcon, 
-  TwitterIcon, 
-  FacebookIcon 
+import {
+  GithubIcon,
+  LinkedinIcon,
+  TwitterIcon,
+  FacebookIcon,
+  InstagramIcon,
+  YoutubeIcon
 } from './SocialIcons';
 
 import Image from 'next/image';
@@ -13,6 +15,7 @@ import { SiteSettings } from '@/lib/types';
 import { urlFor } from '@/sanity/image';
 
 import LiveStatus from './LiveStatus';
+import { Globe, Mail } from 'lucide-react';
 
 export default function Hero({ settings }: { settings: SiteSettings }) {
   const taglines = settings.heroTaglines || ['Full Stack Developer', 'MERN Stack Expert', 'UI/UX Designer'];
@@ -31,7 +34,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
               <LiveStatus username={settings.githubUsername} />
             </motion.div>
 
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -39,8 +42,8 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
             >
               WELCOME TO MY WORLD
             </motion.span>
-            
-            <motion.h1 
+
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -62,7 +65,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
               </span>
             </motion.h1>
 
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -72,7 +75,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
             </motion.p>
 
             {/* Social & Skills */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
@@ -82,17 +85,21 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
                 <span className="text-xs font-semibold tracking-widest text-[var(--text-muted)] uppercase">FIND ME IN</span>
                 <div className="flex gap-4">
                   {settings.socialLinks?.filter(l => l.enabled !== false).slice(0, 3).map((link, i) => (
-                    <a 
-                      key={i} 
-                      href={link.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
+                    <a
+                      key={i}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"
                     >
-                      {link.platform === 'github' && <GithubIcon size={18} />}
-                      {link.platform === 'linkedin' && <LinkedinIcon size={18} />}
-                      {link.platform === 'twitter' && <TwitterIcon size={18} />}
                       {link.platform === 'facebook' && <FacebookIcon size={18} />}
+                      {link.platform === 'twitter' && <TwitterIcon size={18} />}
+                      {link.platform === 'linkedin' && <LinkedinIcon size={18} />}
+                      {link.platform === 'github' && <GithubIcon size={18} />}
+                      {link.platform === 'instagram' && <InstagramIcon size={18} />}
+                      {link.platform === 'youtube' && <YoutubeIcon size={18} />}
+                      {link.platform === 'email' && <Mail size={18} />}
+                      {link.platform === 'website' && <Globe size={18} />}
 
                     </a>
                   ))}
@@ -112,7 +119,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
           </div>
 
           {/* Right Content - Profile Image */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0.5, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
@@ -138,7 +145,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
             </div>
           </motion.div>
         </div>
-        
+
         {/* Decorative Separator */}
         <div className="w-full h-[1px] bg-[var(--border-color)] mt-24" />
       </div>

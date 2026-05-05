@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const project = defineType({
   name: 'project',
@@ -53,7 +53,7 @@ export const project = defineType({
       title: 'Content',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'block',
           styles: [
             { title: 'Normal', value: 'normal' },
@@ -62,8 +62,6 @@ export const project = defineType({
             { title: 'H4', value: 'h4' },
             { title: 'Quote', value: 'blockquote' },
           ],
-        } as any,
-        {
           marks: {
             decorators: [
               { title: 'Bold', value: 'strong' },
@@ -87,8 +85,8 @@ export const project = defineType({
               },
             ],
           },
-        },
-        {
+        }),
+        defineArrayMember({
           type: 'image',
           options: { hotspot: true },
           fields: [
@@ -103,11 +101,11 @@ export const project = defineType({
               title: 'Caption',
             },
           ],
-        },
-        {
+        }),
+        defineArrayMember({
           type: 'code',
           title: 'Code Block',
-        },
+        }),
       ],
     }),
   ],

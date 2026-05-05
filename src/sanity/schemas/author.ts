@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const author = defineType({
   name: 'author',
@@ -33,7 +33,7 @@ export const author = defineType({
       title: 'Social Links',
       description: 'Enter your Social Media URLs',
       of: [
-        {
+        defineArrayMember({
           type: 'object',
           fields: [
             defineField({
@@ -63,7 +63,7 @@ export const author = defineType({
               subtitle: 'url',
             },
           },
-        },
+        }),
       ],
     }),
     defineField({
@@ -71,12 +71,12 @@ export const author = defineType({
       title: 'Bio',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           title: 'Block',
           type: 'block',
           styles: [{ title: 'Normal', value: 'normal' }],
           lists: [],
-        } as any,
+        }),
       ],
     }),
   ],
