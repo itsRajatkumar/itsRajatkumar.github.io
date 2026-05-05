@@ -12,7 +12,7 @@ import { sanityClient } from '@/sanity/client';
 import { allProjectsQuery, allSkillsQuery, siteSettingsQuery, featuredPostsQuery, allExperiencesQuery } from '@/sanity/queries';
 import { SiteSettings, Stat, BlogPost, Experience } from '@/lib/types';
 
-export const revalidate = 3600;
+export const revalidate = 60; // Faster revalidation for debugging
 
 interface Project {
   title: string;
@@ -115,9 +115,17 @@ export default async function Home() {
               title={settings.projectsHeading || "My Portfolio"}
             />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {projects.slice(0, 3).map((project, i) => (
-                <ProjectCard key={project.slug.current} {...project} index={i} />
-              ))}
+              {projects.length > 0 ? (
+                projects.slice(0, 3).map((project, i) => (
+                  <ProjectCard key={project.slug.current} {...project} index={i} />
+                ))
+              ) : (
+                <div className="col-span-full py-20 text-center inbio-card">
+                  <p className="text-[var(--text-secondary)] text-lg italic">
+                    No projects found. Please ensure your projects are published in Sanity.
+                  </p>
+                </div>
+              )}
             </div>
             <div className="text-center mt-16">
               <Link
