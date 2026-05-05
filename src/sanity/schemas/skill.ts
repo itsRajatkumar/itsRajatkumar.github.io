@@ -6,9 +6,17 @@ export const skill = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'categoryRef',
+      title: 'Category (from Schema)',
+      type: 'reference',
+      to: [{ type: 'category' }],
+      description: 'Select a category from the predefined categories',
+    }),
+    defineField({
       name: 'category',
-      title: 'Category',
+      title: 'Category (Manual/Legacy)',
       type: 'string',
+      description: 'If you don\'t want to use a reference, or for legacy support, type a category here (e.g., "AI")',
       options: {
         list: [
           { title: 'Frontend', value: 'Frontend' },
@@ -17,9 +25,9 @@ export const skill = defineType({
           { title: 'DevOps', value: 'DevOps' },
           { title: 'Languages', value: 'Languages' },
           { title: 'Tools', value: 'Tools' },
+          { title: 'AI', value: 'AI' },
         ],
       },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'skillName',
@@ -29,9 +37,16 @@ export const skill = defineType({
     }),
     defineField({
       name: 'icon',
-      title: 'Icon Name',
+      title: 'Lucide Icon Name',
       type: 'string',
-      description: 'Lucide icon name (e.g., "code", "database", "server")',
+      description: 'Lucide icon name (e.g., "code", "database", "server"). Ignored if SVG Content is provided.',
+    }),
+    defineField({
+      name: 'svgIcon',
+      title: 'SVG Icon Content',
+      type: 'text',
+      description: 'Paste raw SVG code here. This will override the Lucide icon.',
+      rows: 5,
     }),
     defineField({
       name: 'enabled',
@@ -39,6 +54,7 @@ export const skill = defineType({
       type: 'boolean',
       description: 'Toggle off to hide this skill from the website without deleting it',
       initialValue: true,
+      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {

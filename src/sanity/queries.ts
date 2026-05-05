@@ -102,10 +102,11 @@ export const allExperiencesQuery = `*[_type == "experience"] | order(startDate d
 export const latestExperienceQuery = `*[_type == "experience"] | order(startDate desc)[0] { company }`;
 
 // ── Skills (only enabled) ──
-export const allSkillsQuery = `*[_type == "skill" && enabled != false] | order(category asc, skillName asc) {
-  category,
+export const allSkillsQuery = `*[_type == "skill" && enabled != false] | order(categoryRef->title asc, category asc, skillName asc) {
+  "category": coalesce(categoryRef->title, category),
   skillName,
-  icon
+  icon,
+  svgIcon
 }`;
 
 // ── Blog ──

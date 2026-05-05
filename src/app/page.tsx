@@ -28,6 +28,7 @@ interface Skill {
   category: string;
   skillName: string;
   icon?: string;
+  svgIcon?: string;
 }
 
 const defaultStats: Stat[] = [
@@ -162,6 +163,7 @@ export default async function Home() {
                         key={skill.skillName}
                         skillName={skill.skillName}
                         icon={skill.icon}
+                        svgIcon={skill.svgIcon}
                       />
                     ))}
                   </div>

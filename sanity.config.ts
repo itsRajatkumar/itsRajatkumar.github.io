@@ -4,6 +4,7 @@ import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { codeInput } from '@sanity/code-input';
 import { schemaTypes } from './src/sanity/schemas';
+import ContactMessages from './src/sanity/tools/ContactMessages';
 
 export default defineConfig({
   name: 'rajat-kumar-portfolio',
@@ -31,6 +32,14 @@ export default defineConfig({
           ]),
     }),
     codeInput(),
+  ],
+  tools: (prev) => [
+    ...prev,
+    {
+      name: 'contact-messages',
+      title: 'Contact Messages',
+      component: ContactMessages,
+    },
   ],
   schema: {
     types: schemaTypes,

@@ -13,6 +13,7 @@
     "@sanity/client": "^7.22.0",
     "@sanity/code-input": "^7.1.0",
     "@sanity/image-url": "^2.1.1",
+    "@sanity/ui": "^3.2.0",
     "@supabase/supabase-js": "^2.105.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/stega": "^1.1.0",

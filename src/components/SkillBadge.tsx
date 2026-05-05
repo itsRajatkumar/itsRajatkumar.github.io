@@ -22,9 +22,10 @@ const iconMap: Record<string, LucideIcon> = {
 interface SkillBadgeProps {
   skillName: string;
   icon?: string;
+  svgIcon?: string;
 }
 
-export default function SkillBadge({ skillName, icon }: SkillBadgeProps) {
+export default function SkillBadge({ skillName, icon, svgIcon }: SkillBadgeProps) {
   const IconComponent = icon && iconMap[icon] ? iconMap[icon] : Code;
 
   return (
@@ -32,10 +33,17 @@ export default function SkillBadge({ skillName, icon }: SkillBadgeProps) {
       className="inbio-button group !flex !items-center !gap-3 !px-5 !py-3 !rounded-lg cursor-default"
       title={skillName}
     >
-      <IconComponent 
-        size={18} 
-        className="text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors" 
-      />
+      {svgIcon ? (
+        <div 
+          className="w-[18px] h-[18px] flex items-center justify-center text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors"
+          dangerouslySetInnerHTML={{ __html: svgIcon }}
+        />
+      ) : (
+        <IconComponent 
+          size={18} 
+          className="text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors" 
+        />
+      )}
       <span className="text-sm font-semibold tracking-wide text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
         {skillName}
       </span>
