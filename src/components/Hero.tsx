@@ -15,10 +15,42 @@ import { SiteSettings } from '@/lib/types';
 import { urlFor } from '@/sanity/image';
 
 import LiveStatus from './LiveStatus';
+import { useState, useEffect } from 'react';
 import { Globe, Mail } from 'lucide-react';
 
 export default function Hero({ settings }: { settings: SiteSettings }) {
   const taglines = settings.heroTaglines || ['Full Stack Developer', 'MERN Stack Expert', 'UI/UX Designer'];
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(50);
+
+  useEffect(() => {
+    if (!taglines.length) return;
+
+    const handleTyping = () => {
+      const i = loopNum % taglines.length;
+      const fullText = taglines[i];
+
+      setDisplayText(
+        isDeleting
+          ? fullText.substring(0, displayText.length - 1)
+          : fullText.substring(0, displayText.length + 1)
+      );
+
+      setTypingSpeed(isDeleting ? 30 : 50);
+
+      if (!isDeleting && displayText === fullText) {
+        setTimeout(() => setIsDeleting(true), 2000); // Pause at end
+      } else if (isDeleting && displayText === '') {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, loopNum, taglines, typingSpeed]);
 
   return (
     <section id="home" className="section-padding min-h-screen flex items-center pt-32 lg:pt-0">
@@ -52,16 +84,11 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
               Hi, I’m <span className="text-[var(--accent)]">{settings.name || 'Rajat Kumar'}</span>
               <br />
               <span className="text-[var(--text-primary)]">a </span>
-              <span className="text-[var(--text-primary)] inline-block">
-                {/* Simplified typewriter effect with Framer Motion */}
-                <motion.span
-                  key={taglines[0]} // Simple implementation for now
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="gradient-text"
-                >
-                  {taglines[0]}.
-                </motion.span>
+              <span className="text-[var(--text-primary)] inline-block min-h-[1.2em] align-top">
+                <span className="gradient-text inline-block">
+                  {displayText}
+                  <span className="inline-block ml-1 w-[3px] h-[1em] bg-[var(--accent)] animate-pulse align-middle" />
+                </span>
               </span>
             </motion.h1>
 
