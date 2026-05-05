@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ThemeProvider from '@/components/ThemeProvider';
 import { sanityClient } from '@/sanity/client';
-import { siteSettingsQuery } from '@/sanity/queries';
+import { siteSettingsQuery, latestExperienceQuery } from '@/sanity/queries';
 import { SiteSettings } from '@/lib/types';
 
 const poppins = Poppins({
@@ -47,7 +47,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const settings: SiteSettings = await sanityClient.fetch(siteSettingsQuery);
+  const [settings, latestExp] = await Promise.all([
+    sanityClient.fetch<SiteSettings>(siteSettingsQuery),
+    sanityClient.fetch<{ company: string }>(latestExperienceQuery)
+  ]);
 
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
@@ -61,6 +64,28 @@ export default async function RootLayout({
             {children}
           </main>
           <Footer siteSettings={settings} />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": settings?.name || "Rajat Kumar Prajapati",
+                "url": settings?.siteUrl || "https://rajatkumar.tech",
+                "jobTitle": settings?.heroTaglines?.[0] || "Software Developer",
+                "worksFor": {
+                  "@type": "Organization",
+                  "name": latestExp?.company || "Software Developer"
+                },
+                "alumniOf": {
+                  "@type": "CollegeOrUniversity",
+                  "name": settings?.college || "Geetanjali Institute of Technical Studies"
+                },
+                "sameAs": settings?.socialLinks?.filter(l => l.enabled !== false).map(l => l.url) || [],
+                "knowsAbout": settings?.focusAreas || []
+              })
+            }}
+          />
         </ThemeProvider>
         <Analytics />
       </body>

@@ -98,6 +98,8 @@ export const allExperiencesQuery = `*[_type == "experience"] | order(startDate d
   description
 }`;
 
+export const latestExperienceQuery = `*[_type == "experience"] | order(startDate desc)[0] { company }`;
+
 // ── Skills (only enabled) ──
 export const allSkillsQuery = `*[_type == "skill" && enabled != false] | order(category asc, skillName asc) {
   category,
