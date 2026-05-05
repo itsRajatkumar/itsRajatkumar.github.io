@@ -52,6 +52,24 @@ export default async function RootLayout({
     sanityClient.fetch<{ company: string }>(latestExperienceQuery)
   ]);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": settings?.name || "Rajat Kumar Prajapati",
+    "url": settings?.siteUrl || "https://rajatkumar.tech",
+    "jobTitle": settings?.heroTaglines?.[0] || "Software Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": latestExp?.company || "Arachnomesh Technologies Pvt. Ltd."
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": settings?.college || "Geetanjali Institute of Technical Studies, Udaipur"
+    },
+    "sameAs": settings?.socialLinks?.filter(l => l.enabled !== false).map(l => l.url) || [],
+    "knowsAbout": settings?.focusAreas || []
+  };
+
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body 
@@ -66,25 +84,7 @@ export default async function RootLayout({
           <Footer siteSettings={settings} />
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Person",
-                "name": settings?.name || "Rajat Kumar Prajapati",
-                "url": settings?.siteUrl || "https://rajatkumar.tech",
-                "jobTitle": settings?.heroTaglines?.[0] || "Software Developer",
-                "worksFor": {
-                  "@type": "Organization",
-                  "name": latestExp?.company || "Software Developer"
-                },
-                "alumniOf": {
-                  "@type": "CollegeOrUniversity",
-                  "name": settings?.college || "Geetanjali Institute of Technical Studies"
-                },
-                "sameAs": settings?.socialLinks?.filter(l => l.enabled !== false).map(l => l.url) || [],
-                "knowsAbout": settings?.focusAreas || []
-              })
-            }}
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           />
         </ThemeProvider>
         <Analytics />
