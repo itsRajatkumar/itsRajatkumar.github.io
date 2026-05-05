@@ -20,7 +20,7 @@ export interface SiteSettings {
   seoTitle?: string;
   seoDescription?: string;
   seoKeywords?: string[];
-  seoOgImage?: { asset: { url: string } };
+  seoOgImage?: string;
   siteUrl?: string;
   // Hero
   heroTitle?: string;

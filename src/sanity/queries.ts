@@ -10,7 +10,7 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0] {
   seoTitle,
   seoDescription,
   seoKeywords,
-  seoOgImage,
+  "seoOgImage": seoOgImage.asset->url,
   siteUrl,
   // Hero
   heroTitle,

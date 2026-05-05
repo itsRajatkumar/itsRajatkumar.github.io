@@ -26,7 +26,10 @@ const montserrat = Montserrat({
 export async function generateMetadata(): Promise<Metadata> {
   const settings: SiteSettings = await sanityClient.fetch(siteSettingsQuery);
   
+  const ogImage = settings?.seoOgImage || '/og-image.png';
+  
   return {
+    metadataBase: new URL(settings?.siteUrl || 'https://rajatkumar.tech'),
     title: {
       template: `%s | ${settings?.name || 'Rajat Kumar'}`,
       default: settings?.seoTitle || 'Rajat Kumar | Portfolio',
@@ -34,10 +37,41 @@ export async function generateMetadata(): Promise<Metadata> {
     description: settings?.seoDescription || 'Professional Full-Stack Developer Portfolio',
     keywords: settings?.seoKeywords || ['Next.js', 'React', 'TypeScript', 'Sanity', 'Portfolio'],
     authors: [{ name: settings?.name || 'Rajat Kumar' }],
+    alternates: {
+      canonical: '/',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       title: settings?.seoTitle || 'Rajat Kumar | Portfolio',
       description: settings?.seoDescription || 'Professional Full-Stack Developer Portfolio',
+      url: './',
+      siteName: settings?.name || 'Rajat Kumar',
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: settings?.name || 'Rajat Kumar',
+        },
+      ],
+      locale: 'en_US',
       type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: settings?.seoTitle || 'Rajat Kumar | Portfolio',
+      description: settings?.seoDescription || 'Professional Full-Stack Developer Portfolio',
+      images: [ogImage],
     },
   };
 }
