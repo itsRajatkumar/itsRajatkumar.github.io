@@ -5,6 +5,7 @@ import { structureTool } from 'sanity/structure';
 import { codeInput } from '@sanity/code-input';
 import { schemaTypes } from './src/sanity/schemas';
 import ContactMessages from './src/sanity/tools/ContactMessages';
+import { IndexNowAction, createPublishWithIndexNow } from './src/sanity/actions/IndexNowAction';
 
 export default defineConfig({
   name: 'rajat-kumar-portfolio',
@@ -43,5 +44,22 @@ export default defineConfig({
   ],
   schema: {
     types: schemaTypes,
+  },
+  document: {
+    actions: (prev, context) => {
+      const supportedTypes = ['post', 'category', 'author', 'project', 'siteSettings'];
+      
+      if (supportedTypes.includes(context.schemaType)) {
+        return [
+          ...prev.map((originalAction) =>
+            originalAction.action === 'publish'
+              ? createPublishWithIndexNow(originalAction, context)
+              : originalAction
+          ),
+          IndexNowAction,
+        ];
+      }
+      return prev;
+    },
   },
 });
