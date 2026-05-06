@@ -76,34 +76,8 @@ export default async function Home() {
     return acc;
   }, {} as Record<string, Skill[]>);
 
-  // JSON-LD Schema
-  const personSchema = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": settings.name || "Rajat Kumar Prajapati",
-    "url": settings.siteUrl || "https://rajatkumar.tech",
-    "jobTitle": settings.heroSubtitle || "MERN Stack Expert",
-    "worksFor": experiences[0] ? {
-      "@type": "Organization",
-      "name": experiences[0].company
-    } : undefined,
-    "alumniOf": settings.college ? {
-      "@type": "CollegeOrUniversity",
-      "name": settings.college
-    } : undefined,
-    "sameAs": [
-      ...(settings.socialLinks?.filter(l => l.enabled !== false).map(l => l.url) || []),
-      `mailto:${settings.contactEmail || 'contact@rajatkumar.tech'}`
-    ],
-    "knowsAbout": skills.map(s => s.skillName).slice(0, 10)
-  };
-
   return (
     <div className="bg-[var(--bg-primary)]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-      />
       {/* ═══ Hero Section ═══ */}
       <Hero settings={settings} />
 
@@ -185,14 +159,14 @@ export default async function Home() {
               subtitle={settings.experienceSubheading || "2022 - PRESENT"}
               title={settings.experienceHeading || "My Resume"}
             />
-            
+
             <div className="max-w-5xl mx-auto">
               <div className="relative pl-8 border-l-4 border-[var(--bg-secondary)] border-opacity-50 flex flex-col gap-12">
                 {experiences.slice(0, 3).map((exp, i) => (
                   <ExperienceCard key={`${exp.company}-${i}`} {...exp} index={i} />
                 ))}
               </div>
-              
+
               <div className="text-center mt-16">
                 <Link
                   href="/experience"
@@ -217,7 +191,7 @@ export default async function Home() {
               subtitle="LATEST WRITING"
               title="Featured Blogs"
             />
-            
+
             <div className="grid gap-10 lg:gap-10 md:grid-cols-2 xl:grid-cols-3 mt-12">
               {featuredPosts.map((post, index) => (
                 <AnimatedSection key={post.slug.current} delay={0.1 * (index + 1)}>
