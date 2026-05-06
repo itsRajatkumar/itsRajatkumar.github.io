@@ -60,7 +60,7 @@ export const IndexNowAction = ({
   }, [doc, type, slug, toast, onComplete]);
 
   // Only show for relevant types and if document exists
-  const supportedTypes = ['post', 'category', 'author', 'project', 'siteSettings'];
+  const supportedTypes = ['post', 'category', 'author', 'project', 'siteSettings', 'skill', 'experience'];
   if (!supportedTypes.includes(type) || !doc) {
     return null;
   }

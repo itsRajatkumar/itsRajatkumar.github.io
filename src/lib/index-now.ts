@@ -17,7 +17,7 @@ export async function submitToIndexNow(urls: string[]) {
   const payload = {
     host,
     key,
-    keyLocation: `https://${host}/${key}.txt`,
+    keyLocation: `https://${host}/index-now-key.txt`,
     urlList: urls,
   };
 

@@ -40,6 +40,12 @@ export async function POST(req: NextRequest) {
             `${siteUrl}/blog`,
           );
           break;
+        case "skill":
+          urlsToIndex.push(`${siteUrl}/`, `${siteUrl}/about`);
+          break;
+        case "experience":
+          urlsToIndex.push(`${siteUrl}/`, `${siteUrl}/experience`);
+          break;
         default:
           return NextResponse.json(
             { error: "Unsupported document type" },

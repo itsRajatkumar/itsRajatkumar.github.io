@@ -47,7 +47,7 @@ export default defineConfig({
   },
   document: {
     actions: (prev, context) => {
-      const supportedTypes = ['post', 'category', 'author', 'project', 'siteSettings'];
+      const supportedTypes = ['post', 'category', 'author', 'project', 'siteSettings', 'skill', 'experience'];
       
       if (supportedTypes.includes(context.schemaType)) {
         return [
