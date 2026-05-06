@@ -55,7 +55,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: settings?.seoTitle || 'Rajat Kumar | Portfolio',
       description: settings?.seoDescription || 'Professional Full-Stack Developer Portfolio',
-      url: './',
+      url: '/',
       siteName: settings?.name || 'Rajat Kumar',
       images: [
         {
