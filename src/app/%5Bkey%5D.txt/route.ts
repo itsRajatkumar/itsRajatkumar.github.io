@@ -6,9 +6,9 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { key: string } }
+  { params }: { params: Promise<{ key: string }> }
 ) {
-  const { key } = params;
+  const { key } = await params;
   const expectedKey = process.env.INDEX_NOW_KEY;
 
   // The request will be for something like /uuid.txt
