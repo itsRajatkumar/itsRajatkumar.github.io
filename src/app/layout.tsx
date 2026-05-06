@@ -8,6 +8,7 @@ import ThemeProvider from '@/components/ThemeProvider';
 import { sanityClient } from '@/sanity/client';
 import { siteSettingsQuery, latestExperienceQuery } from '@/sanity/queries';
 import { SiteSettings } from '@/lib/types';
+import Script from 'next/script';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -25,9 +26,9 @@ const montserrat = Montserrat({
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings: SiteSettings = await sanityClient.fetch(siteSettingsQuery);
-  
+
   const ogImage = settings?.seoOgImage || '/og-image.png';
-  
+
   return {
     metadataBase: new URL(settings?.siteUrl || 'https://rajatkumar.tech'),
     title: {
@@ -107,36 +108,44 @@ export default async function RootLayout({
       "addressRegion": "Madhya Pradesh",
       "addressCountry": "IN"
     },
-    "sameAs": settings?.socialLinks?.length 
-      ? settings.socialLinks.filter(l => l.enabled !== false).map(l => l.url) 
+    "sameAs": settings?.socialLinks?.length
+      ? settings.socialLinks.filter(l => l.enabled !== false).map(l => l.url)
       : [
-          "https://github.com/itsrajatkumar",
-          "https://linkedin.com/in/thisisrajatkumar",
-          "https://x.com/iam_RKPrajapati",
-          "http://instagram.com/thisisrajatkumar",
-          "https://www.facebook.com/thisisrajatkumar"
-        ],
+        "https://github.com/itsrajatkumar",
+        "https://linkedin.com/in/thisisrajatkumar",
+        "https://x.com/iam_RKPrajapati",
+        "http://instagram.com/thisisrajatkumar",
+        "https://www.facebook.com/thisisrajatkumar"
+      ],
     "contactPoint": {
       "@type": "ContactPoint",
       "email": settings?.contactEmail || "contact@rajatkumar.tech",
       "contactType": "professional"
     },
-    "knowsAbout": settings?.focusAreas?.length 
-      ? settings.focusAreas 
+    "knowsAbout": settings?.focusAreas?.length
+      ? settings.focusAreas
       : [
-          "MERN Stack",
-          "ONDC Protocol",
-          "API Design",
-          "System Optimization",
-          "TypeScript",
-          "MongoDB",
-          "Node.js"
-        ]
+        "MERN Stack",
+        "ONDC Protocol",
+        "API Design",
+        "System Optimization",
+        "TypeScript",
+        "MongoDB",
+        "Node.js"
+      ]
   };
 
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
-      <body 
+      <head>
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          strategy="beforeInteractive" // This forces it into the initial HTML
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body
         className={`${poppins.variable} ${montserrat.variable} font-sans`}
         data-accent={settings?.theme || 'cyan'}
       >
@@ -146,10 +155,6 @@ export default async function RootLayout({
             {children}
           </main>
           <Footer siteSettings={settings} />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
         </ThemeProvider>
         <Analytics />
       </body>
