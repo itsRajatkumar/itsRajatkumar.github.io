@@ -92,16 +92,46 @@ export default async function RootLayout({
     "name": settings?.name || "Rajat Kumar Prajapati",
     "url": settings?.siteUrl || "https://rajatkumar.tech",
     "jobTitle": settings?.heroTaglines?.[0] || "Software Developer",
+    "description": settings?.seoDescription || "Software Developer specializing in the MERN Stack and ONDC protocols with over three years of experience.",
     "worksFor": {
       "@type": "Organization",
-      "name": latestExp?.company || "Arachnomesh Technologies Pvt. Ltd."
+      "name": latestExp?.company || "Arachnomesh Technologies Pvt. Ltd"
     },
     "alumniOf": {
       "@type": "CollegeOrUniversity",
       "name": settings?.college || "Geetanjali Institute of Technical Studies, Udaipur"
     },
-    "sameAs": settings?.socialLinks?.filter(l => l.enabled !== false).map(l => l.url) || [],
-    "knowsAbout": settings?.focusAreas || []
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Neemuch",
+      "addressRegion": "Madhya Pradesh",
+      "addressCountry": "IN"
+    },
+    "sameAs": settings?.socialLinks?.length 
+      ? settings.socialLinks.filter(l => l.enabled !== false).map(l => l.url) 
+      : [
+          "https://github.com/itsrajatkumar",
+          "https://linkedin.com/in/thisisrajatkumar",
+          "https://x.com/iam_RKPrajapati",
+          "http://instagram.com/thisisrajatkumar",
+          "https://www.facebook.com/thisisrajatkumar"
+        ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": settings?.contactEmail || "contact@rajatkumar.tech",
+      "contactType": "professional"
+    },
+    "knowsAbout": settings?.focusAreas?.length 
+      ? settings.focusAreas 
+      : [
+          "MERN Stack",
+          "ONDC Protocol",
+          "API Design",
+          "System Optimization",
+          "TypeScript",
+          "MongoDB",
+          "Node.js"
+        ]
   };
 
   return (
