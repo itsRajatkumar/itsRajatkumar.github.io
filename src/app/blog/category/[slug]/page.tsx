@@ -40,6 +40,7 @@ export default async function CategoryPage(props: { params: Promise<{ slug: stri
         <SectionHeading 
           title={`Category: ${category.title}`} 
           subtitle="FILTERED POSTS" 
+          level="h1"
         />
         {category.description && (
           <div className="text-center mb-10">

@@ -33,7 +33,7 @@ export default async function BlogArchivePage() {
   return (
     <div className="section-padding bg-[var(--bg-primary)] min-h-screen">
       <div className="section-container pt-32 lg:pt-40">
-        <SectionHeading title="Archive" subtitle="All Posts" />
+        <SectionHeading title="Archive" subtitle="All Posts" level="h1" />
         <div className="text-center">
           <p className="mt-2 text-lg text-[var(--text-secondary)]">
             See all posts we have ever written.

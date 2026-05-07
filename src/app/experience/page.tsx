@@ -42,6 +42,7 @@ export default async function ExperiencePage() {
         <SectionHeading
           subtitle={settings?.experienceSubheading || "2022 - PRESENT"}
           title={settings?.experienceHeading || "My Resume"}
+          level="h1"
         />
 
         <div className="flex flex-col lg:flex-row gap-16">

@@ -4,9 +4,17 @@ interface SectionHeadingProps {
   title: string;
   subtitle?: string;
   align?: 'left' | 'center';
+  level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
-export default function SectionHeading({ title, subtitle, align = 'center' }: SectionHeadingProps) {
+export default function SectionHeading({ 
+  title, 
+  subtitle, 
+  align = 'center',
+  level = 'h2' 
+}: SectionHeadingProps) {
+  const HeadingTag = level;
+  
   return (
     <AnimatedSection className={`mb-12 ${align === 'center' ? 'text-center' : 'text-left'}`}>
       {subtitle && (
@@ -14,9 +22,9 @@ export default function SectionHeading({ title, subtitle, align = 'center' }: Se
           {subtitle}
         </span>
       )}
-      <h2 className="text-4xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]">
+      <HeadingTag className="text-4xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]">
         {title}
-      </h2>
+      </HeadingTag>
     </AnimatedSection>
   );
 }

@@ -42,6 +42,7 @@ export default async function AboutPage() {
         <SectionHeading
           subtitle="MY BIOGRAPHY"
           title="About Me"
+          level="h1"
         />
 
         <div className="flex flex-col lg:flex-row gap-16 items-start">

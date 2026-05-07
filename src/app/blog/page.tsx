@@ -33,7 +33,7 @@ export default async function BlogPage() {
   return (
     <div className="section-padding bg-[var(--bg-primary)] min-h-screen">
       <div className="section-container pt-32 lg:pt-40">
-        <SectionHeading title="Blog" subtitle="Latest Articles" />
+        <SectionHeading title="Blog" subtitle="Latest Articles" level="h1" />
         
         <AnimatedSection delay={0.1}>
           <div className="grid gap-10 lg:gap-12 md:grid-cols-2 mt-12">

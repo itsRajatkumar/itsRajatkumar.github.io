@@ -53,7 +53,7 @@ export default async function ContactPage() {
   return (
     <div className="section-padding bg-[var(--bg-primary)] min-h-screen">
       <div className="section-container pt-32 lg:pt-40">
-        <SectionHeading title={subheading} subtitle={heading} />
+        <SectionHeading title={subheading} subtitle={heading} level="h1" />
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-12">
           {/* Left: Contact Info Card */}

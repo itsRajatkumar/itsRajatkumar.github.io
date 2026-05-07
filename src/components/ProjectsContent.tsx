@@ -37,6 +37,7 @@ export default function ProjectsContent({ initialProjects }: ProjectsContentProp
         <SectionHeading
           subtitle="VISIT MY PORTFOLIO AND KEEP YOUR FEEDBACK"
           title="My Portfolio"
+          level="h1"
         />
 
         {/* Tag Filters */}
