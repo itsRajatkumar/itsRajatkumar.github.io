@@ -91,7 +91,8 @@ export const projectBySlugQuery = `*[_type == "project" && slug.current == $slug
 }`;
 
 export const projectSlugsQuery = `*[_type == "project" && defined(slug.current)] {
-  "slug": slug.current
+  "slug": slug.current,
+  "_updatedAt": _updatedAt
 }`;
 
 // ── Experience ──
