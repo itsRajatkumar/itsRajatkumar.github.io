@@ -70,3 +70,49 @@ export function GlobeIcon({ size = 18, className }: IconProps) {
     </svg>
   );
 }
+
+// ─── Built-in platform icon map ─────────────────────────────────
+export const platformIcons: Record<string, React.ComponentType<IconProps>> = {
+  github: GithubIcon,
+  linkedin: LinkedinIcon,
+  twitter: TwitterIcon,
+  instagram: InstagramIcon,
+  facebook: FacebookIcon,
+  youtube: YoutubeIcon,
+  email: EmailIcon,
+  website: GlobeIcon,
+};
+
+// ─── Universal Social Link Icon ─────────────────────────────────
+// Renders the correct icon for any social link:
+// 1. If the link has a custom svgIcon, render that
+// 2. If the platform has a built-in icon, render that
+// 3. Fallback to a globe icon
+interface SocialLinkIconProps {
+  platform: string;
+  svgIcon?: string;
+  size?: number;
+  className?: string;
+}
+
+export function SocialLinkIcon({ platform, svgIcon, size = 18, className }: SocialLinkIconProps) {
+  // Custom SVG from CMS
+  if (svgIcon) {
+    return (
+      <span
+        className={className}
+        style={{ width: size, height: size, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
+        dangerouslySetInnerHTML={{ __html: svgIcon }}
+      />
+    );
+  }
+
+  // Built-in icon
+  const BuiltInIcon = platformIcons[platform.toLowerCase()];
+  if (BuiltInIcon) {
+    return <BuiltInIcon size={size} className={className} />;
+  }
+
+  // Fallback: Globe icon
+  return <GlobeIcon size={size} className={className} />;
+}

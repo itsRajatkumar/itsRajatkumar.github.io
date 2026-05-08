@@ -1,34 +1,15 @@
 'use client';
 
-import { Mail, Heart, Globe } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { SiteSettings, SocialLink } from '@/lib/types';
+import { SocialLinkIcon } from './SocialIcons';
 
-import { 
-  GithubIcon, 
-  LinkedinIcon, 
-  TwitterIcon, 
-  InstagramIcon, 
-  FacebookIcon, 
-  YoutubeIcon 
-} from './SocialIcons';
-
-// Map platform names to icon components
-const platformIcons: Record<string, React.ComponentType<{ size?: number }>> = {
-  github: GithubIcon,
-  linkedin: LinkedinIcon,
-  twitter: TwitterIcon,
-  instagram: InstagramIcon,
-  facebook: FacebookIcon,
-  youtube: YoutubeIcon,
-  email: Mail,
-  website: Globe,
-};
 // Default social links when no CMS data is available
 const defaultSocialLinks: SocialLink[] = [
-  { platform: 'github', url: 'https://github.com', enabled: true },
-  { platform: 'linkedin', url: 'https://linkedin.com', enabled: true },
-  { platform: 'twitter', url: 'https://twitter.com', enabled: true },
-  { platform: 'email', url: 'mailto:contact@rajatkumar.tech', enabled: true },
+  { platform: 'github', label: 'GitHub', url: 'https://github.com', enabled: true },
+  { platform: 'linkedin', label: 'LinkedIn', url: 'https://linkedin.com', enabled: true },
+  { platform: 'twitter', label: 'Twitter', url: 'https://twitter.com', enabled: true },
+  { platform: 'email', label: 'Email', url: 'mailto:contact@rajatkumar.tech', enabled: true },
 ];
 
 interface FooterProps {
@@ -70,14 +51,14 @@ export default function Footer({ siteSettings }: FooterProps) {
           {/* Social Links */}
           <div className="flex items-center gap-3">
             {socialLinks.map((social) => {
-              const IconComponent = platformIcons[social.platform] || Globe;
               return (
                 <a
                   key={`${social.platform}-${social.url}`}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={social.platform}
+                  aria-label={social.label || social.platform}
+                  title={social.label || social.platform}
                   className="social-icon-btn w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
                   style={{
                     background: 'var(--bg-card)',
@@ -95,7 +76,11 @@ export default function Footer({ siteSettings }: FooterProps) {
                     e.currentTarget.style.background = 'var(--bg-card)';
                   }}
                 >
-                  <IconComponent size={18} />
+                  <SocialLinkIcon 
+                    platform={social.platform} 
+                    svgIcon={social.svgIcon} 
+                    size={18} 
+                  />
                 </a>
               );
             })}

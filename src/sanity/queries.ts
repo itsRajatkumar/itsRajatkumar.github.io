@@ -50,8 +50,11 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0] {
   // Social
   socialLinks[] {
     platform,
+    label,
     url,
-    enabled
+    svgIcon,
+    enabled,
+    showOnAbout
   },
   // Stats
   stats[] {

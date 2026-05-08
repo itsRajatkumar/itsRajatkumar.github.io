@@ -1,14 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { Mail, Globe } from 'lucide-react';
-import { 
-  FacebookIcon, 
-  TwitterIcon, 
-  LinkedinIcon, 
-  InstagramIcon,
-  GithubIcon,
-  YoutubeIcon
-} from '@/components/SocialIcons';
+import { SocialLinkIcon } from '@/components/SocialIcons';
 
 import AnimatedSection from '@/components/AnimatedSection';
 import SectionHeading from '@/components/SectionHeading';
@@ -114,16 +106,9 @@ export default async function ContactPage() {
                           target="_blank" 
                           rel="noopener noreferrer" 
                           className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"
+                          title={link.label || link.platform}
                         >
-                          {link.platform === 'facebook' && <FacebookIcon size={18} />}
-                          {link.platform === 'twitter' && <TwitterIcon size={18} />}
-                          {link.platform === 'linkedin' && <LinkedinIcon size={18} />}
-                          {link.platform === 'github' && <GithubIcon size={18} />}
-                          {link.platform === 'instagram' && <InstagramIcon size={18} />}
-                          {link.platform === 'youtube' && <YoutubeIcon size={18} />}
-                          {link.platform === 'email' && <Mail size={18} />}
-                          {link.platform === 'website' && <Globe size={18} />}
-
+                          <SocialLinkIcon platform={link.platform} svgIcon={link.svgIcon} size={18} />
                         </a>
                       ))}
                     </div>

@@ -1,14 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-  GithubIcon,
-  LinkedinIcon,
-  TwitterIcon,
-  FacebookIcon,
-  InstagramIcon,
-  YoutubeIcon
-} from './SocialIcons';
+import { SocialLinkIcon } from './SocialIcons';
 
 import Image from 'next/image';
 import { SiteSettings } from '@/lib/types';
@@ -139,15 +132,9 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inbio-button !w-12 !h-12 !p-0 !rounded-lg"
+                      title={link.label || link.platform}
                     >
-                      {link.platform === 'facebook' && <FacebookIcon size={18} />}
-                      {link.platform === 'twitter' && <TwitterIcon size={18} />}
-                      {link.platform === 'linkedin' && <LinkedinIcon size={18} />}
-                      {link.platform === 'github' && <GithubIcon size={18} />}
-                      {link.platform === 'instagram' && <InstagramIcon size={18} />}
-                      {link.platform === 'youtube' && <YoutubeIcon size={18} />}
-                      {link.platform === 'email' && <Mail size={18} />}
-                      {link.platform === 'website' && <GlobeIcon size={18} />}
+                      <SocialLinkIcon platform={link.platform} svgIcon={link.svgIcon} size={18} />
                     </a>
                   ))}
                 </div>

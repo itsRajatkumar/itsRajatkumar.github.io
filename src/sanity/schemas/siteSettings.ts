@@ -282,31 +282,26 @@ export const siteSettings = defineType({
     // ═══════════════════════════════════════
     defineField({
       name: 'socialLinks',
-      title: 'Social Links',
+      title: 'Social / Profile Links',
       type: 'array',
       fieldset: 'social',
-      description: 'Add, reorder, or disable social media links. They appear in Footer and Contact page.',
+      description: 'Add any social media or coding profile links. They appear in Footer, Contact, and About pages. For custom platforms, paste an SVG icon.',
       of: [
         {
           type: 'object',
           fields: [
             defineField({
               name: 'platform',
-              title: 'Platform',
+              title: 'Platform Key',
               type: 'string',
-              options: {
-                list: [
-                  { title: 'GitHub', value: 'github' },
-                  { title: 'LinkedIn', value: 'linkedin' },
-                  { title: 'Twitter / X', value: 'twitter' },
-                  { title: 'Instagram', value: 'instagram' },
-                  { title: 'Facebook', value: 'facebook' },
-                  { title: 'YouTube', value: 'youtube' },
-                  { title: 'Email', value: 'email' },
-                  { title: 'Website', value: 'website' },
-                ],
-              },
+              description: 'Lowercase identifier, e.g. "github", "leetcode", "codechef". Use a known key (github, linkedin, twitter, instagram, facebook, youtube, email, website) for built-in icons, or any custom key.',
               validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'label',
+              title: 'Display Label',
+              type: 'string',
+              description: 'Human-readable name shown on the site, e.g. "LeetCode", "CodeChef"',
             }),
             defineField({
               name: 'url',
@@ -316,21 +311,37 @@ export const siteSettings = defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
+              name: 'svgIcon',
+              title: 'Custom SVG Icon',
+              type: 'text',
+              description: 'Paste SVG markup for platforms without a built-in icon. Example: <svg viewBox="0 0 24 24" ...>...</svg>',
+              rows: 4,
+            }),
+            defineField({
               name: 'enabled',
               title: 'Enabled',
               type: 'boolean',
               initialValue: true,
             }),
+            defineField({
+              name: 'showOnAbout',
+              title: 'Show on About Page',
+              type: 'boolean',
+              description: 'Toggle to show this link in the About page profiles section',
+              initialValue: true,
+            }),
           ],
           preview: {
             select: {
-              title: 'platform',
+              platform: 'platform',
+              label: 'label',
               subtitle: 'url',
               enabled: 'enabled',
             },
-            prepare({ title, subtitle, enabled }) {
+            prepare({ platform, label, subtitle, enabled }: { platform?: string; label?: string; subtitle?: string; enabled?: boolean }) {
+              const displayName = label || (platform || '').charAt(0).toUpperCase() + (platform || '').slice(1);
               return {
-                title: `${enabled === false ? '🔴' : '🟢'} ${(title || '').charAt(0).toUpperCase() + (title || '').slice(1)}`,
+                title: `${enabled === false ? '🔴' : '🟢'} ${displayName}`,
                 subtitle: subtitle || '',
               };
             },
@@ -338,10 +349,10 @@ export const siteSettings = defineType({
         },
       ],
       initialValue: [
-        { platform: 'github', url: 'https://github.com', enabled: true },
-        { platform: 'linkedin', url: 'https://linkedin.com', enabled: true },
-        { platform: 'twitter', url: 'https://twitter.com', enabled: true },
-        { platform: 'email', url: 'mailto:contact@rajatkumar.tech', enabled: true },
+        { platform: 'github', label: 'GitHub', url: 'https://github.com', enabled: true, showOnAbout: true },
+        { platform: 'linkedin', label: 'LinkedIn', url: 'https://linkedin.com', enabled: true, showOnAbout: true },
+        { platform: 'twitter', label: 'Twitter / X', url: 'https://twitter.com', enabled: true, showOnAbout: true },
+        { platform: 'email', label: 'Email', url: 'mailto:contact@rajatkumar.tech', enabled: true, showOnAbout: false },
       ],
     }),
 

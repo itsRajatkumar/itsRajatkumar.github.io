@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import { GraduationCap, MapPin, Mail, Phone } from 'lucide-react';
+import { GraduationCap, MapPin, Mail, Phone, ExternalLink } from 'lucide-react';
+import { SocialLinkIcon } from '@/components/SocialIcons';
 import AnimatedSection from '@/components/AnimatedSection';
 import SectionHeading from '@/components/SectionHeading';
 import { sanityClient } from '@/sanity/client';
@@ -112,27 +113,61 @@ export default async function AboutPage() {
                 )}
               </AnimatedSection>
 
-              <AnimatedSection delay={0.3} className="inbio-card !p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-[var(--bg-secondary)] shadow-[var(--shadow-inner)] flex items-center justify-center text-[var(--accent)]">
-                    <MapPin size={20} />
+              <AnimatedSection delay={0.3} className="inbio-card !p-8 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-lg bg-[var(--bg-secondary)] shadow-[var(--shadow-inner)] flex items-center justify-center text-[var(--accent)]">
+                      <MapPin size={20} />
+                    </div>
+                    <div>
+                      <p className="text-xs text-[var(--text-muted)] uppercase tracking-widest font-bold">Location</p>
+                      <p className="text-[var(--text-primary)] font-semibold">{settings?.location || 'India 🇮🇳'}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-xs text-[var(--text-muted)] uppercase tracking-widest font-bold">Location</p>
-                    <p className="text-[var(--text-primary)] font-semibold">{settings?.location || 'India 🇮🇳'}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-[var(--bg-secondary)] shadow-[var(--shadow-inner)] flex items-center justify-center text-[var(--accent)]">
-                    <GraduationCap size={20} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-[var(--text-muted)] uppercase tracking-widest font-bold">Education</p>
-                    <p className="text-[var(--text-primary)] font-semibold">{settings?.education || 'B.Tech in CSE'}</p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-[var(--bg-secondary)] shadow-[var(--shadow-inner)] flex items-center justify-center text-[var(--accent)]">
+                      <GraduationCap size={20} />
+                    </div>
+                    <div>
+                      <p className="text-xs text-[var(--text-muted)] uppercase tracking-widest font-bold">Education</p>
+                      <p className="text-[var(--text-primary)] font-semibold">{settings?.education || 'B.Tech in CSE'}</p>
+                    </div>
                   </div>
                 </div>
               </AnimatedSection>
             </div>
+
+            {/* Profiles Section */}
+            {settings?.socialLinks && settings.socialLinks.filter(l => l.enabled !== false && l.showOnAbout !== false).length > 0 && (
+              <AnimatedSection delay={0.4} className="inbio-card !p-10">
+                <h3 className="text-2xl font-bold mb-8 text-[var(--text-primary)] flex items-center gap-3">
+                  Professional Profiles
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {settings.socialLinks
+                    .filter(l => l.enabled !== false && l.showOnAbout !== false)
+                    .map((link, i) => (
+                      <a
+                        key={i}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-4 p-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--accent)] transition-all duration-300"
+                      >
+                        <div className="w-12 h-12 rounded-lg bg-[var(--bg-primary)] flex items-center justify-center text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors">
+                          <SocialLinkIcon platform={link.platform} svgIcon={link.svgIcon} size={24} />
+                        </div>
+                        <div className="flex-1 overflow-hidden">
+                          <p className="text-sm font-bold text-[var(--text-primary)] truncate">{link.label || link.platform}</p>
+                          <p className="text-xs text-[var(--text-muted)] truncate flex items-center gap-1 group-hover:text-[var(--accent)] transition-colors">
+                            View Profile <ExternalLink size={10} />
+                          </p>
+                        </div>
+                      </a>
+                    ))}
+                </div>
+              </AnimatedSection>
+            )}
           </div>
         </div>
       </div>

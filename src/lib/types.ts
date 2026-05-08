@@ -1,9 +1,12 @@
 // Shared TypeScript interfaces for Sanity data
 
 export interface SocialLink {
-  platform: 'github' | 'linkedin' | 'twitter' | 'instagram' | 'facebook' | 'youtube' | 'email' | 'website';
+  platform: string;
+  label?: string;
   url: string;
+  svgIcon?: string;
   enabled?: boolean;
+  showOnAbout?: boolean;
 }
 
 export interface Stat {
