@@ -1,7 +1,18 @@
 import { PortableTextComponents } from '@portabletext/react';
 import Image from 'next/image';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx';
+import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
+import javascript from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash';
+import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json';
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+
+SyntaxHighlighter.registerLanguage('tsx', tsx);
+SyntaxHighlighter.registerLanguage('typescript', typescript);
+SyntaxHighlighter.registerLanguage('javascript', javascript);
+SyntaxHighlighter.registerLanguage('bash', bash);
+SyntaxHighlighter.registerLanguage('json', json);
 import { urlFor } from '@/sanity/image';
 
 export const portableTextComponents: PortableTextComponents = {
