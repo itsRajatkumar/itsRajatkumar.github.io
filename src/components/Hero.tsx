@@ -181,7 +181,7 @@ export default function Hero({ settings }: { settings: SiteSettings }) {
               <div className="w-full h-full rounded-2xl overflow-hidden bg-gradient-to-b from-[var(--bg-secondary)] to-[var(--bg-primary)] relative">
                 {settings.heroImage ? (
                   <Image
-                    src={urlFor(settings.heroImage).url()}
+                    src={urlFor(settings.heroImage).auto('format').fit('max').width(800).url()}
                     alt={settings.name || "Profile"}
                     fill
                     sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 450px"

@@ -53,10 +53,12 @@ export default async function AboutPage() {
               <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-[var(--bg-secondary)]">
                 {settings?.heroImage ? (
                   <Image
-                    src={urlFor(settings.heroImage).url()}
+                    src={urlFor(settings.heroImage).auto('format').fit('max').width(800).url()}
                     alt={settings.name || "Profile"}
                     fill
                     className="object-contain"
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 33vw"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-[var(--text-muted)] italic">
