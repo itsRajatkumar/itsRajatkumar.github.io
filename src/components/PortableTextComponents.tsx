@@ -74,6 +74,36 @@ export const portableTextComponents: PortableTextComponents = {
         </div>
       );
     },
+    table: ({ value }: { value: any }) => {
+      if (!value || !value.rows || value.rows.length === 0) return null;
+      const [head, ...rows] = value.rows;
+      return (
+        <div className="overflow-x-auto my-6">
+          <table className="w-full text-left border-collapse" style={{ border: '1px solid var(--border-color)' }}>
+            <thead style={{ background: 'var(--bg-elevated)', borderBottom: '1px solid var(--border-color)' }}>
+              <tr>
+                {head.cells.map((cell: string, i: number) => (
+                  <th key={i} className="p-3 font-semibold" style={{ color: 'var(--text-primary)', borderRight: i < head.cells.length - 1 ? '1px solid var(--border-color)' : 'none' }}>
+                    {cell}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row: { cells: string[] }, i: number) => (
+                <tr key={i} style={{ borderBottom: i < rows.length - 1 ? '1px solid var(--border-color)' : 'none' }}>
+                  {row.cells.map((cell: string, j: number) => (
+                    <td key={j} className="p-3" style={{ color: 'var(--text-secondary)', borderRight: j < row.cells.length - 1 ? '1px solid var(--border-color)' : 'none' }}>
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    },
   },
   marks: {
     link: ({ children, value }) => {

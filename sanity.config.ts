@@ -3,6 +3,7 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { codeInput } from '@sanity/code-input';
+import { table } from '@sanity/table';
 import { schemaTypes } from './src/sanity/schemas';
 import ContactMessages from './src/sanity/tools/ContactMessages';
 import { IndexNowAction, createPublishWithIndexNow } from './src/sanity/actions/IndexNowAction';
@@ -14,6 +15,7 @@ export default defineConfig({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   basePath: '/studio',
   plugins: [
+    table(),
     structureTool({
       structure: (S) =>
         S.list()

@@ -48,6 +48,36 @@ const components: PortableTextComponents = {
         </div>
       );
     },
+    table: ({ value }: { value: any }) => {
+      if (!value || !value.rows || value.rows.length === 0) return null;
+      const [head, ...rows] = value.rows;
+      return (
+        <div className="overflow-x-auto my-6">
+          <table className="w-full text-left border-collapse border border-[var(--border-color)]">
+            <thead className="bg-[var(--bg-secondary)] border-b border-[var(--border-color)]">
+              <tr>
+                {head.cells.map((cell: string, i: number) => (
+                  <th key={i} className="p-3 font-semibold text-[var(--text-primary)] border-r border-[var(--border-color)] last:border-r-0">
+                    {cell}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row: { cells: string[] }, i: number) => (
+                <tr key={i} className="border-b border-[var(--border-color)] last:border-b-0">
+                  {row.cells.map((cell: string, j: number) => (
+                    <td key={j} className="p-3 text-[var(--text-secondary)] border-r border-[var(--border-color)] last:border-r-0">
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    },
   },
   marks: {
     link: ({ children, value }) => {
